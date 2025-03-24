@@ -46,19 +46,19 @@ export async function POST(req: NextRequest) {
 
         // Read the uploaded file as text
         const uploadedText = await file.text();
-        const uploadedData = parse(uploadedText, { header: true }).data;  // Set header: true
+        const uploadedData = parse<{ Rings: string }>(uploadedText, { header: true }).data;  // Set header: true
 
         // Read the locally stored correct output CSV
         const correctFilePath = path.join(process.cwd(), "app", "tabs", "data", "Correct_output_to_validate.csv");
         const correctText = fs.readFileSync(correctFilePath, "utf-8");
-        const correctData = parse(correctText, { header: true }).data;  // Set header: true
+        const correctData = parse<{ Rings: string }>(correctText, { header: true }).data;  // Set header: true
 
         // Convert to numerical arrays using the 'Rings' column
         const uploadedValues = uploadedData
-            .map((row: any) => parseFloat(row.Rings))
+            .map((row: { Rings: string }) => parseFloat(row.Rings))
             .filter(val => !isNaN(val));
         const correctValues = correctData
-            .map((row: any) => parseFloat(row.Rings))
+            .map((row: { Rings: string }) => parseFloat(row.Rings))
             .filter(val => !isNaN(val));
 
         // Calculate RMSE

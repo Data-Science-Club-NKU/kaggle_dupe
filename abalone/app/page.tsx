@@ -9,8 +9,6 @@ import {
   Button,
   Tabs,
   Tab,
-  Switch,
-  Input,
   Textarea,
 } from "@nextui-org/react";
 import DataTab from "./tabs/data";
