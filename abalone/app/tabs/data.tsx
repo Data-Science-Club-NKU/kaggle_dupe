@@ -1,5 +1,5 @@
 import { Card, CardBody, Button } from "@nextui-org/react";
-import { Download, FileText, Database, PieChart, Trophy, ChevronRight } from "lucide-react";
+import { Download, FileText, Database, PieChart, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Sun, Moon } from "react-feather";
 
@@ -25,28 +25,28 @@ export default function DataTab() {
     {
       id: "train",
       name: "Training Dataset",
-      description: "Contains 50 practice problems with solutions",
+      description: "Use this CSV file to train the model.",
       filename: "train.csv",
       icon: <FileText className="text-emerald-500" />,
-      stats: { problems: 50, complexity: "Medium", format: "CSV", size: "1.2 MB" },
+      stats: { rows: 3341, columns: 10, format: "CSV", size: "173KB" },
       color: "from-emerald-500 to-teal-400"
     },
     {
       id: "test",
       name: "Test Dataset",
-      description: "Contains 60 competition problems",
+      description: "Use this model to test the model.",
       filename: "test.csv",
       icon: <Database className="text-violet-500" />,
-      stats: { problems: 60, complexity: "High", format: "CSV", size: "1.5 MB" },
+      stats: {  rows: 836, columns: 9, format: "CSV", size: "41KB"},
       color: "from-violet-500 to-purple-400"
     },
     {
       id: "submission",
-      name: "Submission Format",
-      description: "Template for submitting your answers",
+      name: "Submission Format for the model.",
+      description: "Template for submitting your answers.",
       filename: "Sample_submission.csv",
       icon: <PieChart className="text-amber-500" />,
-      stats: { problems: 60, complexity: "Low", format: "CSV", size: "0.3 MB" },
+      stats: { rows: 836, columns: 2, format: "CSV", size: "8KB" },
       color: "from-amber-500 to-orange-400"
     }
   ];
@@ -74,7 +74,7 @@ export default function DataTab() {
             Mathematics Competition Dataset
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Explore our comprehensive AIME-style mathematics problems with integer answers ranging from 0 to 999.
+            Predict the age of abalone from physical measurements.
           </p>
         </div>
 
@@ -84,7 +84,6 @@ export default function DataTab() {
             <div className="flex items-center justify-between mb-3">
               <h3 className="font-medium text-gray-700 dark:text-gray-200">Available Resources</h3>
               <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
-                <Trophy size={14} className="mr-1" />
                 <span>3 files</span>
               </div>
             </div>
@@ -161,11 +160,6 @@ export default function DataTab() {
                         <div className="font-medium text-gray-800 dark:text-gray-200">{value}</div>
                       </div>
                     ))}
-                  </div>
-                  
-                  <div className="text-sm text-gray-600 dark:text-gray-300 space-y-2">
-                    <p>This file contains mathematics problems similar to the American Invitational Mathematics Examination (AIME).</p>
-                    <p>Each problem has a single integer answer between 0 and 999.</p>
                   </div>
                 </div>
                 

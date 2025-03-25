@@ -60,9 +60,9 @@ const RulesTab: FC = () => {
       color: "emerald",
       items: [
         { text: "All submissions must be made through the official platform", highlight: false },
-        { text: "Teams are limited to a maximum of 4 members", highlight: true },
+        { text: "Teams are limited to a maximum of 3 members", highlight: true },
         { text: "Solutions must be your own original work", highlight: false },
-        { text: "The competition runs for 48 hours straight", highlight: false },
+        { text: "The competition runs till the dealine mentioned.", highlight: false },
       ],
     },
     {
@@ -72,7 +72,7 @@ const RulesTab: FC = () => {
       color: "blue",
       items: [
         { text: "Submissions must be in the specified CSV format", highlight: false },
-        { text: "Each team is limited to 5 submissions per day", highlight: true },
+        { text: "Unlimited Submissions.", highlight: true },
         { text: "Final submissions must be made before the deadline", highlight: false },
         { text: "Late submissions will not be considered", highlight: false },
       ],
@@ -83,9 +83,9 @@ const RulesTab: FC = () => {
       icon: <Award size={20} className="text-purple-500" />,
       color: "purple",
       items: [
-        { text: "Accuracy of solutions (70%)", highlight: true },
-        { text: "Efficiency of implementation (20%)", highlight: false },
-        { text: "Code quality and documentation (10%)", highlight: false },
+        { text: "Evaluated based on RMSE.", highlight: true },
+        { text: "Evaluated on the 30% of the dataset.", highlight: false },
+        { text: "No funky business.", highlight: false },
         { text: "Ties will be broken by timestamp of final submission", highlight: false },
       ],
     },
