@@ -21,6 +21,7 @@
     "react-feather": "^2.0.10"
   },
   "devDependencies": {
+    "file-loader": "^6.2.0",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
