@@ -9,22 +9,20 @@ const nextConfig: NextConfig = {
       };
     }
 
-    // Define the file paths to copy
     const filesToCopy = [
       './data/train.csv',
       './data/test.csv',
       './data/Sample_submission.csv',
     ];
 
-    // Add a rule to copy the files to the public directory
     config.module.rules.push({
       test: /\.(csv)$/,
       use: [
         {
           loader: 'file-loader',
           options: {
-            publicPath: '/_next/static/files',  // Path in the browser
-            outputPath: `${isServer ? '../' : ''}static/files`, // Path in the output directory
+            publicPath: '/_next/static/files',
+            outputPath: `${isServer ? '../' : ''}static/files`,
             name: '[name].[ext]',
             emitFile: !isServer,
           },
@@ -34,7 +32,6 @@ const nextConfig: NextConfig = {
 
     return config;
   },
-  output: 'export', // required for static websites
   distDir: 'dist', // output directory
   images: { unoptimized: true },
 };
