@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
-import path from 'path';
 
 const nextConfig: NextConfig = {
+  // Remove custom distDir to use default .next directory
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -9,31 +9,22 @@ const nextConfig: NextConfig = {
       };
     }
 
-    const filesToCopy = [
-      './data/train.csv',
-      './data/test.csv',
-      './data/Sample_submission.csv',
-    ];
-
+    // Simplified file handling
     config.module.rules.push({
       test: /\.(csv)$/,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            publicPath: '/_next/static/files',
-            outputPath: `${isServer ? '../' : ''}static/files`,
-            name: '[name].[ext]',
-            emitFile: !isServer,
-          },
-        },
-      ],
+      type: 'asset/resource',
+      generator: {
+        filename: 'static/files/[name][ext]'
+      }
     });
 
     return config;
   },
-  distDir: 'dist', // output directory
-  images: { unoptimized: true },
+  images: { 
+    unoptimized: true 
+  },
+  // Optional: Add output configuration if needed
+  output: 'standalone'
 };
 
 export default nextConfig;
