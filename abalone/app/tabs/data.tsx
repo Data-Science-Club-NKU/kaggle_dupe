@@ -27,6 +27,7 @@ export default function DataTab() {
       name: "Training Dataset",
       description: "Use this CSV file to train the model.",
       filename: "train.csv",
+      downloadUrl: "https://9malm6pwpl.ufs.sh/f/Wg4zPKBYwGoPcX82ppnD163QDC7GXO0iPRTYtBpaqgEbNJ5v",
       icon: <FileText className="text-emerald-500" />,
       stats: { rows: 3341, columns: 10, format: "CSV", size: "173KB" },
       color: "from-emerald-500 to-teal-400"
@@ -36,6 +37,7 @@ export default function DataTab() {
       name: "Test Dataset",
       description: "Use this model to test the model.",
       filename: "test.csv",
+      downloadUrl: "https://9malm6pwpl.ufs.sh/f/Wg4zPKBYwGoPYFDt3Rtnu3qp9KniygstSjrcoRvwCOmfaM0Y",
       icon: <Database className="text-violet-500" />,
       stats: {  rows: 836, columns: 9, format: "CSV", size: "41KB"},
       color: "from-violet-500 to-purple-400"
@@ -45,20 +47,20 @@ export default function DataTab() {
       name: "Submission Format for the model.",
       description: "Template for submitting your answers.",
       filename: "Sample_submission.csv",
+      downloadUrl: "https://9malm6pwpl.ufs.sh/f/Wg4zPKBYwGoPVlmYSRDu5OJ8TGS6AKR72rMbk1vZWYDPgsn9",
       icon: <PieChart className="text-amber-500" />,
       stats: { rows: 836, columns: 2, format: "CSV", size: "8KB" },
       color: "from-amber-500 to-orange-400"
     }
   ];
 
-  const handleDownload = (filename: string) => {
-    // Create the download URL for files in the public directory
-    const fileUrl = `/data/${filename}`;
-    
+  const handleDownload = (downloadUrl: string, filename: string) => {
     // Create a temporary anchor element
     const link = document.createElement('a');
-    link.href = fileUrl;
+    link.href = downloadUrl;
     link.download = filename;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
     
     // Trigger the download
     document.body.appendChild(link);
@@ -169,7 +171,12 @@ export default function DataTab() {
                     size="lg"
                     className={`w-full bg-gradient-to-r ${datasets.find(d => d.id === activeFile)?.color} text-white`}
                     endContent={<Download size={18} />}
-                    onClick={() => handleDownload(datasets.find(d => d.id === activeFile)?.filename || "")}
+                    onClick={() => {
+                      const activeDataset = datasets.find(d => d.id === activeFile);
+                      if (activeDataset) {
+                        handleDownload(activeDataset.downloadUrl, activeDataset.filename);
+                      }
+                    }}
                   >
                     Download File
                   </Button>
