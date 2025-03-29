@@ -84,9 +84,9 @@ export default function LeaderboardTab() {
           <div className="mt-4 p-4 bg-gray-800 rounded-lg">
             <h3 className="text-lg font-semibold text-gray-200">Team Members</h3>
             <ul className="mt-2 text-gray-400">
-              {leaderboardData.find(team => team.rank === selectedTeam)?.teamMembers.map((member, index) => (
+              {leaderboardData.find(team => team.rank === selectedTeam)?.teamMembers?.map((member, index) => (
                 <li key={index}>{member}</li>
-              ))}
+              )) || <li>No members found</li>}
             </ul>
           </div>
         )}

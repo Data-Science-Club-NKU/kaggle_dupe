@@ -14,12 +14,12 @@ export async function GET() {
         const submissions = database.collection("submissions");
         const leaderboard = await submissions.find().sort({ rmseScore: 1 }).toArray();
 
-        // Map the leaderboard data to include members and score fields
+        // Map the leaderboard data to include teamMembers and score fields
         const leaderboardData = leaderboard.map((submission, index) => ({
             rank: index + 1,
             avatar: submission.avatar || '', // Assuming avatar field exists
             teamName: submission.teamName,
-            members: submission.members || [], // Assuming members field exists
+            teamMembers: submission.teamMembers || [], // Fixed: Changed from members to teamMembers
             score: submission.rmseScore // Assuming rmseScore is the score
         }));
         
