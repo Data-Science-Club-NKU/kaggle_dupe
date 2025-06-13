@@ -6,7 +6,7 @@ interface Team {
   rank: number;
   avatar: string;
   teamName: string;
-  members: string[];
+  teamMembers: string[]; // Changed from members to teamMembers
   score: number;
 }
 
@@ -47,36 +47,32 @@ export default function LeaderboardTab() {
           {leaderboardData.map((team, index) => (
             <div 
               key={`${team.rank}-${index}`} 
-              className={`flex items-center p-4 cursor-pointer ${
-                index % 2 === 0 
-                  ? "bg-white dark:bg-gray-800" 
-                  : "bg-gray-50 dark:bg-gray-850"
-              } ${
+              className={`flex items-center p-4 cursor-pointer bg-black text-white ${
                 team.rank === 1 
-                  ? "bg-gradient-to-r from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/10 border-l-4 border-yellow-400" 
+                  ? "border-l-4 border-yellow-400" 
                   : ""
-              } transition-all hover:bg-gray-100 dark:hover:bg-gray-750`}
+              } transition-all hover:bg-gray-900`}
               onClick={() => setSelectedTeam(selectedTeam === team.rank ? null : team.rank)}
             >
               <div className="flex items-center w-1/2">
                 <div className={`
                   w-10 h-10 flex items-center justify-center rounded-full mr-4
-                  ${team.rank === 1 ? "bg-yellow-400 text-white" : 
-                    team.rank === 2 ? "bg-gray-300 text-gray-800" : 
-                    team.rank === 3 ? "bg-amber-600 text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"}
+                  ${team.rank === 1 ? "bg-yellow-400 text-black" : 
+                    team.rank === 2 ? "bg-gray-300 text-black" : 
+                    team.rank === 3 ? "bg-amber-600 text-white" : "bg-gray-700 text-white"}
                 `}>
                   {team.avatar}
                 </div>
-                <div className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                <div className="text-lg font-semibold text-white">
                   {team.teamName}
                 </div>
               </div>
               
               <div className="ml-auto flex items-center w-1/2 justify-end">
-                <div className="px-3 py-1 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 font-mono text-sm mr-2">
+                <div className="px-3 py-1 rounded-lg bg-blue-900 text-blue-300 font-mono text-sm mr-2">
                   {team.score !== undefined ? team.score.toFixed(1) : 'N/A'}
                 </div>
-                <div className="text-sm font-medium text-gray-500 dark:text-gray-400 w-8 text-center">
+                <div className="text-sm font-medium text-gray-400 w-8 text-center">
                   #{team.rank}
                 </div>
               </div>
@@ -85,12 +81,12 @@ export default function LeaderboardTab() {
         </div>
         
         {selectedTeam !== null && (
-          <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Team Members</h3>
-            <ul className="mt-2 text-gray-600 dark:text-gray-400">
-              {leaderboardData.find(team => team.rank === selectedTeam)?.members.map((member, index) => (
+          <div className="mt-4 p-4 bg-gray-800 rounded-lg">
+            <h3 className="text-lg font-semibold text-gray-200">Team Members</h3>
+            <ul className="mt-2 text-gray-400">
+              {leaderboardData.find(team => team.rank === selectedTeam)?.teamMembers?.map((member, index) => (
                 <li key={index}>{member}</li>
-              ))}
+              )) || <li>No members found</li>}
             </ul>
           </div>
         )}
